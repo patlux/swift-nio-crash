@@ -5,10 +5,16 @@ import PackageDescription
 
 let package = Package(
     name: "swift-nio-crash",
+    platforms: [.macOS(.v13)],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-nio.git", from: "2.66.0"),
+    ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .executableTarget(
-            name: "swift-nio-crash"),
+            name: "swift-nio-crash",
+            dependencies: [
+                .product(name: "_NIOFileSystem", package: "swift-nio"),
+            ]
+        ),
     ]
 )
